@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
@@ -22,15 +23,21 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 Route::get('/', function () {
 
     return view('menu',[
-        'posts' => Post::all()
+        'posts' => Post::with('category')->get()
     ]);
 });
 
-Route::get('post/{post}', function ($slug) {
+Route::get('post/{post:slug}', function (Post $post) {
 
     return view('primeiroPost',[
-        'post' => Post::findOrFail($slug)
+        'post' => $post
         
     ]);
 
+});
+
+Route::get('categories/{category:slug}',function(Category $category){
+    return view('menu',[
+        'posts' => $category->posts
+    ]);
 });
