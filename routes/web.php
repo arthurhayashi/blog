@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
@@ -21,22 +22,9 @@ use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 
 
-Route::get('/', function () {
+Route::get('/', [PostController::class, 'index'])->name('home');
 
-    return view('menu',[
-        'posts' => Post::latest()->get(),
-        'categories' => Category::all()
-    ]);
-})->name('home');
-
-Route::get('post/{post:slug}', function (Post $post) {
-
-    return view('primeiroPost',[
-        'post' => $post
-        
-    ]);
-
-});
+Route::get('post/{post:slug}', [PostController::class, 'show']);
 
 Route::get('categories/{category:slug}',function(Category $category){
     return view('menu',[
