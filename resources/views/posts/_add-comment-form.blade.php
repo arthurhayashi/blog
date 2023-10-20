@@ -12,16 +12,14 @@
         <div class="mt-5">
             <textarea name="body" class="w-full text-sm focus:outline-none focus:ring" id="" rows="5" placeholder="Quick, something to say!!" required></textarea>
 
-            @error('body')
-            <span class="text-xs text-red-500">{{ $message }}</span>
-            @enderror
+            <x-form.error name="body" />
         </div>
 
 
         <div class="flex justify-end mt-6 pt-6 border-t border-gray-200">
-            <x-submit-button>
+            <x-form.button>
                 Post
-            </x-submit-button>
+            </x-form.button>
         </div>
     </form>
 
