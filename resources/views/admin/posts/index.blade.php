@@ -13,7 +13,14 @@
                     </div>
                 </div>
                 <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                    <a href="/admin/posts/{{ $post->id }}" class="mt-3 font-semibold leading-6 text-blue-500">Edit</a>
+                    <a href="/admin/posts/{{ $post->id }}/edit" class="mt-3 font-semibold leading-6 text-blue-500">Edit</a>
+                    <td>
+                        <form method="POST" action="/admin/posts/{{ $post->id }}">
+                            @csrf
+                            @method('DELETE')
+                            <button class="mt-3 font-semibold leading-6 text-red-500">Delete</button>
+                        </form>
+                    </td>
                 </div>
             </li>
 
